@@ -12,6 +12,9 @@
   <!-- css -->
   <link rel="stylesheet" type="text/css" href="css/style.css">
 
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
@@ -162,20 +165,29 @@
 
   </div>
 
-  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <!-- Include all compiled plugins (below), or include individual files as needed -->
-  <script src="js/bootstrap.min.js"></script>
-
   <script type="text/javascript">
     $('#submit').on('click', function() {
+      event.preventDefault();
+
       var friendAdded = {
         name: $('#name').val().trim(),
         photo: $('#photo').val().trim(),
-        scores: 
+        scores: [
+          $('#q1').val().trim(),
+          $('#q2').val().trim(),
+          $('#q3').val().trim(),
+          $('#q4').val().trim(),
+          $('#q5').val().trim(),
+          $('#q6').val().trim(),
+          $('#q7').val().trim(),
+          $('#q8').val().trim(),
+          $('#q9').val().trim(),
+          $('#q10').val().trim()
+        ]
       }
+      console.log(friendAdded);
+    });
 
-    })
 
 
   </script>
