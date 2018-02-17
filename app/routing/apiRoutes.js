@@ -7,7 +7,16 @@ module.exports = function(app) {
 	});
 
 	app.post('/api/friends', function(req, res) {
-		// handle incoming survey results
 		friendsData.push(req.body);
+		res.json(true);
+
+		// testing
+		console.log("----------------------");
+		console.log("1 apiRoutes req.body \n", req.body);
+		//let scoresNumArr = req.body.scores.join(", ");
+		//console.log("req.body.scores ", scoresNumArr);
+		console.log("----------------------");
+		console.log("2 api Routes friendsData \n", friendsData);
+		//console.log("friendsData ", friendsData);
 	});
 }
