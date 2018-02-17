@@ -1,4 +1,4 @@
-var friendsData = require('../data/friends.js');
+const friendsData = require('../data/friends.js');
 
 module.exports = function(app) {
 	app.get('/api/friends', function(req, res) {
@@ -7,16 +7,33 @@ module.exports = function(app) {
 	});
 
 	app.post('/api/friends', function(req, res) {
-		friendsData.push(req.body);
-		res.json(true);
 
+		let answerArr = req.body.scores;
+		//answerArr = answerArr.split(" ").map(Number);
+
+		const reducer = function (total, amount) {
+			return total + amount;
+		}
+
+		let answerSum = answerArr.reduce(reducer);
+		
 		// testing
 		console.log("----------------------");
-		console.log("1 apiRoutes req.body \n", req.body);
-		//let scoresNumArr = req.body.scores.join(", ");
-		//console.log("req.body.scores ", scoresNumArr);
+		console.log("userInput answerSum \n", answerSum);
 		console.log("----------------------");
-		console.log("2 api Routes friendsData \n", friendsData);
+
+		for (let i = 0; i < friendsData.length; i ++) {
+			let prevAnswers = friendsData[i].scores;
+			let prevAnswersSum = prevAnswers.reduce(reducer);
+
+			let difference = answerSum - prevAnswersSum;
+			let totalDifference = Math.abs(difference);
+			console.log(prevAnswersSum);
+			console.log("\n totalDifference \n", totalDifference);
+		}
 		//console.log("friendsData ", friendsData);
+		
+		friendsData.push(req.body);
+		res.json(true);
 	});
 }
