@@ -1,13 +1,33 @@
-/*body {
-	background-color: #FBE8A6 !important;
-}
-*/
 .jumbotron {
-	background-color: #FBE8A6 !important;
-	color: #303C6C !important;
+	background-color: #8e2020 !important;
+	color: #fff !important;
 }
 
 /*modal*/
 img {
 	width: 80%;
+}
+
+.btn-primary {
+  background-image: linear-gradient(#ab8c38 50%, #a58736 100%) !important;
+  border-color: #b7ad91 !important;
+  background-repeat: repeat-y !important;
+}
+
+#homepage {
+	background-color: #8e2020;
+}
+
+#surveyContainer {
+	background-color: #fff;
+}
+
+#surveybody {
+	background-color: #8e2020;
+	opacity: .88;
+}
+
+#surveyheading {
+	font-size: 3em;
+	color: #8e2020;
 }
