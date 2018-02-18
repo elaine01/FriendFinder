@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-  <title>Friend Finder: Questionnaire</title>
+  <title>Questionnaire | Which Superhero Are You?</title>
 
   <!-- reset -->
   <link rel="stylesheet" type="text/css" href="css/reset.css">
@@ -35,10 +35,10 @@
 
     <h3><strong>About You</strong></h3>
     <h4>Name (Required)</h4>
-    <input type="text" id="name" class="form-control" required>
+    <input type="text" id="name" class="form-control" required placeholder="John Doe">
 
     <h4>Link to Photo Image (Required)</h4>
-    <input type="text" id="photo" class="form-control" required>
+    <input type="text" id="photo" class="form-control" required placeholder="https://images.google.com">
 
     <hr>
 
@@ -66,7 +66,7 @@
 
 
     <h3><strong>Question 3</strong></h3>
-    <h4>You find it easy to stay relaxed and focused even when there is some pressure.</h4>
+    <h4>You find it easy to stay relaxed and focused even when there is external pressure.</h4>
     <select class="chosen-select" id="q3">
       <option value="" disabled selected></option>
       <option value="1">1 (Strongly Disagree)</option>
@@ -163,11 +163,36 @@
     <!-- Submit Button -->
     <button type="submit" class="btn btn-primary btn-lg btn-block" id="submit"><i class="fa fa-check-circle" aria-hidden="true"></i> Submit</button> <br><br>
 
+    <!-- Modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" id="closex">&times;</button>
+            <h3 class="modal-title text-center">Here's your match!</h3>
+          </div>
+          <div class="modal-body">
+            <h4 class="text-center">Name: <span id="modalName"></span></h4>
+            <p id="modalPhoto" class="text-center"></p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal" id="modalClose">Close</button>
+          </div>
+        </div> <!-- modal content -->
+      </div> <!-- modal-dialog -->
+    </div> <!--  myModal -->
+
+    <!-- <footer>
+
+    </footer>
+ -->
   </div>
 
   <script type="text/javascript">
     $('#submit').on('click', function() {
-      //event.preventDefault();
+      event.preventDefault();
 
       let q1 = $('#q1').val().trim();
       let q2 = $('#q2').val().trim();
@@ -200,41 +225,60 @@
 
       const currentURL = window.location.origin;
 
-      //$.post(currentURL + '/api/friends', friendAdded, function(data) {
 
-        let success = function(data) {
-          if (data == true) {
-            console.log("Friend added");
-          } if (data == false) {
-            console.log("No friend added");
-          }
-        };
+      let success = function(data) {
+        if (data == true) {
+          console.log("Friend added");
+        } if (data == false) {
+          console.log("No friend added");
+        }
+      };
 
-        $.ajax({
-          type: "POST",
-          url: "api/friends",
-          contentType: "application/json",
-          data: JSON.stringify(friendAdded),
-          success: success,
+      $.ajax({
+        type: "POST",
+        url: "api/friends",
+        contentType: "application/json",
+        data: JSON.stringify(friendAdded),
+        success: success,
+      }).done(function(data) {
+        $('#modalName').html(data.matchName);
+        let img = $('<img>').attr('src', data.matchImage);
+        $('#modalPhoto').append(img);
+        $('#myModal').modal({
+          keyboard: false,
+          backdrop: 'static' 
         });
+      });
         
         // clear out the form after user submits
-        $('#name').val("");
-        $('#photo').val("");
-        $('#q1').val("");
-        $('#q2').val("");
-        $('#q3').val("");
-        $('#q4').val("");
-        $('#q5').val("");
-        $('#q6').val("");
-        $('#q7').val("");
-        $('#q8').val("");
-        $('#q9').val("");
-        $('#q10').val("");
-      });
+      $('#name').val("");
+      $('#photo').val("");
+      $('#q1').val("");
+      $('#q2').val("");
+      $('#q3').val("");
+      $('#q4').val("");
+      $('#q5').val("");
+      $('#q6').val("");
+      $('#q7').val("");
+      $('#q8').val("");
+      $('#q9').val("");
+      $('#q10').val("");
+      
+     });
+
+    // removes previous best match when user closes modal
+    $('#modalClose').on('click', function() {
+      console.log("here");
+      $('#modalName').empty();
+      $('#modalPhoto').empty();
+    });
+    $('#closex').on('click', function() {
+      console.log("here");
+      $('#modalName').empty();
+      $('#modalPhoto').empty();
+    });
 
 
-  //  });
 
   </script>
 

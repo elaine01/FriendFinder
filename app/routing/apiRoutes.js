@@ -19,11 +19,6 @@ module.exports = function(app) {
 
 		// sum of user's answers
 		let answerSum = answerArr.reduce(reducer);
-		
-		// testing
-		console.log("----------------------");
-		console.log("apiroute 25,\n", answerSum);
-		console.log("----------------------");
 
 		// sum of each score array already stored
 		for (let i = 0; i < friendsData.length; i ++) {
@@ -32,15 +27,11 @@ module.exports = function(app) {
 			let scoresDifference = answerSum - prevScoresSum;
 			let totalDifference = Math.abs(scoresDifference);
 			differences.push(totalDifference);
-			console.log("apiroute 35, ", prevScoresSum);
-			console.log("\n 36 totalDifference, \n", totalDifference);
 		}
 
-		console.log("apiroute 39 differences, ", differences);
 
 		// finds the lowest difference score
 		let minNum = Math.min.apply(null, differences);
-		console.log("apiroute 42 bestMatch, ", minNum);
 
 		let bestMatch = [];
 
@@ -52,8 +43,19 @@ module.exports = function(app) {
 		}
 		
 		// if more than 1 user has the same minimum score, pick the first user in the bestMatch array
-		console.log("54 \n", bestMatch[0]);
-		res.json(bestMatch[0]);
+		let soulmate = bestMatch[0];
+
+		let soulmateName = soulmate.name;
+		let soulmateURL = soulmate.photo;
+
+
+		// Send appropriate response
+		res.json({
+			data: true,
+			status: 'OK',
+			matchName: soulmateName,
+			matchImage: soulmateURL
+		});
 
 		friendsData.push(req.body);
 	});
