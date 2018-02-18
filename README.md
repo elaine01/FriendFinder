@@ -16,7 +16,6 @@ cd into the folder
 npm install
 node server.js
 localhost:8080 in browser
-
 ```
 
 ## Technology
